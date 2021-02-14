@@ -8,6 +8,13 @@
     ansible_facts['os_family'] == "Debian" or
     ansible_facts['os_family'] == "RedHat"
 
+- name: Install prerequisites for installing from pip (Alpine Linux)
+  package:
+    name: build-base
+    state: present
+  become: true
+  when: ansible_facts['os_family'] == "Alpine"
+
 - name: Make sure pip3 is installed
   package:
     name: py3-pip
