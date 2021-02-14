@@ -1,6 +1,6 @@
 ---
-install_chrome: false
-install_brave: false
+install_chrome: true
+install_brave: true
 install_firefox: true
 
 install_rpmfusion:

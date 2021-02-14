@@ -17,19 +17,19 @@
     ansible_facts['distribution'] == "Fedora"
   become: yes
 
-- name: Check if the Google Chrome repository exists (Ubuntu)
+- name: Check if the Google Chrome repository exists (Debian)
   stat:
     path: /etc/apt/sources.list.d/google-chrome.list
   register: google_chrome_deb_repo
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Install Google Chrome from the internet (Ubuntu)
+- name: Install Google Chrome from the internet (Debian)
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   when: |
     install_chrome and
     not google_chrome_deb_repo.stat.exists and
-    ansible_facts['Debian'] == "Debian"
+    ansible_facts['os_family'] == "Debian"
 
 - name: Install Google Chrome
   package:
