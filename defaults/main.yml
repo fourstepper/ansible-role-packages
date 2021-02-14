@@ -4,8 +4,8 @@ install_brave: true
 install_firefox: true
 
 install_rpmfusion:
-  both: false
-  free: true
+  both: true
+  free: false
   nonfree: false
 
 packages:
