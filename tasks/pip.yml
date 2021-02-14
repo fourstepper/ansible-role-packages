@@ -1,0 +1,41 @@
+---
+- name: Make sure pip3 is installed
+  package:
+    name: python3-pip
+    state: present
+  become: true
+  when: |
+    ansible_facts['os_family'] == "Debian" or
+    ansible_facts['os_family'] == "RedHat"
+
+- name: Make sure pip3 is installed
+  package:
+    name: py3-pip
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == "Alpine"
+
+- name: Make sure python3 is installed
+  package:
+    name: python3
+    state: present
+  become: true
+
+- name: Install required pip packages
+  pip:
+    name: "{{ item }}"
+    state: present
+    executable: pip3
+  loop:
+    - "{{ pip_packages }}"
+  become: true
+
+- name: Upgrade all pip packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+    executable: pip3
+  loop:
+    - "{{ pip_packages }}"
+  when: upgrade_system is defined and upgrade_system
+  become: yes

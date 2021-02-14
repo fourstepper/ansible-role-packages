@@ -1,0 +1,23 @@
+---
+install_chrome: false
+install_brave: true
+install_firefox: true
+
+install_rpmfusion:
+  both: false
+  free: true
+  nonfree: false
+
+packages:
+  - neofetch
+
+pip_packages:
+  - pynvim
+
+flatpaks:
+  - com.spotify.Client
+
+# Don't change unless broken
+rpmfusion_repos:
+  free: "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
+  nonfree: "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"

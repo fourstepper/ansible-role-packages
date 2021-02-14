@@ -1,0 +1,39 @@
+---
+- name: Check if the Google Chrome repository is present (Fedora)
+  stat:
+    path: /etc/yum.repos.d/google-chrome.repo
+  register: chrome_repo_exists
+  when: |
+    install_chrome and
+    ansible_facts['distribution'] == "Fedora"
+
+- name: Enable Google Chrome in config manager (Fedora)
+  command:
+    cmd: "dnf config-manager --set-enabled google-chrome"
+    warn: false
+  when: |
+    install_chrome and
+    chrome_repo_exists == false and
+    ansible_facts['distribution'] == "Fedora"
+  become: yes
+
+- name: Check if the Google Chrome repository exists (Ubuntu)
+  stat:
+    path: /etc/apt/sources.list.d/google-chrome.list
+  register: google_chrome_deb_repo
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install Google Chrome from the internet (Ubuntu)
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  when: |
+    install_chrome and
+    not google_chrome_deb_repo.stat.exists and
+    ansible_facts['Debian'] == "Debian"
+
+- name: Install Google Chrome
+  package:
+    name: google-chrome-stable
+    state: present
+  when: install_chrome and ansible_facts['distribution'] != "Alpine"
+  become: yes

@@ -1,0 +1,26 @@
+- name: Make sure flatpak is installed
+  package:
+    name: flatpak
+    state: present
+  register: flatpak_install
+  become: yes
+
+- name: Make sure the flathub repository is present
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    method: user
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install a list of flatpak packages
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  with_items: "{{ flatpaks }}"
+
+- name: Update all flatpaks
+  command:
+    cmd: "flatpak update -y"
+  changed_when: false
+  when: upgrade_system is defined and upgrade_system

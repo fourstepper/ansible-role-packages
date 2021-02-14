@@ -1,0 +1,40 @@
+---
+# tasks file for ansible-role-packages
+- name: Make sure dnf-plugins-core are installed (Fedora)
+  package:
+    name: dnf-plugins-core
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == "Fedora"
+
+- name: Include rpm-fusion repositories
+  include_tasks: rpmfusion.yml
+  when: |
+    ansible_facts['distribution'] == "Fedora" and
+    install_rpmfusion is defined and install_rpmfusion
+
+- name: Include system packages to install
+  include_tasks: pkg.yml
+
+- name: Include flatpak packages to install
+  include_tasks: flatpak.yml
+  when: "{{ ci_test | default(true) }} == true"
+
+- name: Include pip packages to install
+  include_tasks: pip.yml
+
+- name: Include the brave browser installation
+  include_tasks: brave.yml
+  when: install_brave is defined and install_brave
+
+- name: Include the firefox browser installation
+  include_tasks: firefox.yml
+  when: install_firefox is defined and install_firefox
+
+- name: Include the chromium browser installation
+  include_tasks: chromium.yml
+  when: install_chromium is defined and install_chromium
+
+- name: Include the chrome browser installation
+  include_tasks: chrome.yml
+  when: install_chrome is defined and install_chrome

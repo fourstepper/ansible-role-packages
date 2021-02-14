@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    ci_test: false
+
+  tasks:
+    - name: "Include ansible-role-packages"
+      include_role:
+        name: "ansible-role-packages"

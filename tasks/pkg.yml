@@ -1,0 +1,8 @@
+---
+- name: Install a list of packages
+  package:
+    name: "{{ packages }}"
+    state: present
+  become: true
+  when: packages is defined and packages != None
+

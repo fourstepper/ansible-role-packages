@@ -1,0 +1,14 @@
+---
+- name: Install Firefox
+  package:
+    name: firefox
+    state: present
+  become: yes
+  when: ansible_facts['distribution'] != "Debian"
+
+- name: Install Firefox ESR on Debian
+  package:
+    name: firefox-esr
+    state: present
+  become: yes
+  when: ansible_facts['distribution'] == "Debian"
