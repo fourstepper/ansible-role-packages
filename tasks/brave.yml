@@ -24,13 +24,15 @@
     - apt-transport-https
     - curl
     - gnupg
-  become: true
   when: ansible_facts['os_family'] == "Debian"
+  become: true
 
 - name: Add apt key for the Brave Browser repository (Debian)
   ansible.builtin.apt_key:
     url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
     state: present
+  when: ansible_facts['os_family'] == "Debian"
+  become: true
 
 - name: Add Brave Browser repository (Debian)
   ansible.builtin.apt_repository:
@@ -38,6 +40,8 @@
     state: present
     filename: brave-browser-release
     update_cache: true
+  when: ansible_facts['os_family'] == "Debian"
+  become: true
 
 - name: Install Brave Browser
   package:
