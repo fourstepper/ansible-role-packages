@@ -35,5 +35,4 @@
   package:
     name: google-chrome-stable
     state: present
-  when: install_chrome and ansible_facts['distribution'] != "Alpine"
   become: yes

@@ -39,7 +39,9 @@
 
 - name: Include the brave browser installation
   include_tasks: brave.yml
-  when: install_brave is defined and install_brave
+  when: |
+    install_brave is defined and install_brave and
+    ansible_facts['os_family'] != "Alpine"
 
 - name: Include the firefox browser installation
   include_tasks: firefox.yml
@@ -51,4 +53,6 @@
 
 - name: Include the chrome browser installation
   include_tasks: chrome.yml
-  when: install_chrome is defined and install_chrome
+  when: |
+    install_chrome is defined and install_chrome and
+    ansible_facts['os_family'] != "Alpine"

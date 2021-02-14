@@ -47,5 +47,4 @@
   package:
     name: brave-browser
     state: present
-  when: install_brave and ansible_facts['distribution'] != "Alpine"
   become: true
