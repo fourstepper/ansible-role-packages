@@ -1,6 +1,8 @@
 ansible-role-packages
 =========
 
+[![builds.sr.ht status](https://builds.sr.ht/~fourstepper/ansible-role-packages.svg)](https://builds.sr.ht/~fourstepper/ansible-role-packages?)
+
 This role installs distro, flatpak and pip packages depending on defined variables
 
 Role Variables
