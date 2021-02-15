@@ -32,9 +32,8 @@
 
 - name: Install Google Chrome from the internet (Debian)
   apt:
-    deb: >
-      https://dl.google.com/
-      linux/direct/google-chrome-stable_current_amd64.deb
+    deb: "https://dl.google.com/linux/direct/\
+          google-chrome-stable_current_amd64.deb"
   when: |
     ansible_facts['os_family'] == "Debian" and
     install_chrome and not google_chrome_deb_repo.stat.exists | default(true)
