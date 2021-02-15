@@ -19,9 +19,9 @@
     cmd: "dnf config-manager --set-enabled google-chrome"
     warn: false
   when: |
+    ansible_facts['distribution'] == "Fedora" and
     install_chrome and
-    not chrome_repo_fedora.stat.exists and
-    ansible_facts['distribution'] == "Fedora"
+    not chrome_repo_fedora.stat.exists
   become: true
 
 - name: Check if the Google Chrome repository exists (Debian)
