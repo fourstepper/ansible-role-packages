@@ -7,10 +7,12 @@
     install_chrome and
     ansible_facts['distribution'] == "Fedora"
 
-- name: Add the fedora-workstation-repositories package
+- name: Add the fedora-workstation-repositories package (Fedora)
   package:
     name: fedora-workstation-repositories
     state: present
+  become: true
+  when: ansible_facts['distribution'] == "Fedora"
 
 - name: Enable Google Chrome in config manager (Fedora)
   command:
@@ -20,7 +22,7 @@
     install_chrome and
     not chrome_repo_fedora.stat.exists and
     ansible_facts['distribution'] == "Fedora"
-  become: yes
+  become: true
 
 - name: Check if the Google Chrome repository exists (Debian)
   stat:
@@ -41,4 +43,4 @@
   package:
     name: google-chrome-stable
     state: present
-  become: yes
+  become: true
