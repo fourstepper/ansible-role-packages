@@ -1,6 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    ci_test: false
   tasks:
     - name: Wait for systemd to complete initialization. # noqa 303
       command: systemctl is-system-running
