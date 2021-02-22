@@ -44,5 +44,5 @@
     executable: pip3
   loop:
     - "{{ pip_packages }}"
-  when: upgrade_system is defined and upgrade_system
+  when: upgrade is defined and upgrade
   become: yes

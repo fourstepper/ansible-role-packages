@@ -23,4 +23,4 @@
   command:
     cmd: "flatpak update -y"
   changed_when: false
-  when: upgrade_system is defined and upgrade_system
+  when: upgrade is defined and upgrade
