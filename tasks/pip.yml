@@ -10,10 +10,13 @@
 
 - name: Install prerequisites for installing from pip (Alpine Linux)
   package:
-    name: build-base, py3-setuptools
+    name: "{{ item }}"
     state: present
   become: true
   when: ansible_facts['os_family'] == "Alpine"
+  with_items:
+    - build-base
+    - py3-setuptools
 
 - name: Make sure pip3 is installed
   package:
