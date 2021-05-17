@@ -32,7 +32,7 @@
 
 - name: Include flatpak packages to install
   include_tasks: flatpak.yml
-  when: "{{ ci_test | default(true) }} == true"
+  when: not ci_test|default(false)
 
 - name: Include pip packages to install
   include_tasks: pip.yml
