@@ -1,0 +1,23 @@
+- name: Make sure Rust is installed
+  package:
+    name: rust
+  when: |
+    ansible_facts['os_family'] == "RedHat" or
+    ansible_facts['distribution'] == "Alpine"
+  become: true
+
+- name: Make sure Rust is installed
+  package:
+    name: rustc
+  when:
+    - ansible_facts['os_family'] == "Debian"
+  become: true
+
+- name: Make sure cargo is installed
+  package:
+    name: cargo
+  become: true
+
+- name: Install required cargo packages
+  community.general.cargo:
+    name: "{{ cargo_packages }}"

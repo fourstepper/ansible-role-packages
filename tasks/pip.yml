@@ -18,18 +18,18 @@
     - build-base
     - py3-setuptools
 
+- name: Make sure python3 is installed
+  package:
+    name: python3
+    state: present
+  become: true
+
 - name: Make sure pip3 is installed
   package:
     name: py3-pip
     state: present
   become: true
   when: ansible_facts['distribution'] == "Alpine"
-
-- name: Make sure python3 is installed
-  package:
-    name: python3
-    state: present
-  become: true
 
 - name: Install required pip packages
   pip:

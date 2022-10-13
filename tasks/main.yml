@@ -36,6 +36,11 @@
 
 - name: Include pip packages to install
   include_tasks: pip.yml
+  when: (pip_packages | length) > 0
+
+- name: Include cargo packages to install
+  include_tasks: cargo.yml
+  when: (cargo_packages | length) > 0
 
 - name: Include the brave browser installation
   include_tasks: brave.yml
