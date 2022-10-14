@@ -42,6 +42,12 @@
   include_tasks: cargo.yml
   when: (cargo_packages | length) > 0
 
+- name: Include npm and yarn packages to install
+  include_tasks: js.yaml
+  when: |
+    (npm_packages | length) > 0 or
+    (yarn_packages | length) > 0
+
 - name: Include the brave browser installation
   include_tasks: brave.yml
   when: |

@@ -1,0 +1,51 @@
+- name: Make sure nodejs and npm are installed
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nodejs
+    - npm
+  become: true
+
+- name: Install YARN
+  package:
+    name: yarnpkg
+    state: present
+  become: true
+  when: |
+    ansible_facts['distribution'] == 'Ubuntu' or
+    ansible_facts['distribution'] == 'Fedora' or
+    ansible_facts['distribution'] == 'RedHat'
+
+- name: Install YARN from npm (Debian)
+  npm:
+    name: yarn
+    state: present
+    global: true
+  become: true
+  when: ansible_facts['distribution'] == 'Debian'
+
+- name: Install YARN
+  package:
+    name: yarn
+    state: present
+  become: true
+  when: ansible_facts['os_family'] == 'Alpine'
+
+- name: Install npm packages
+  npm:
+    name: "{{ item }}"
+    state: present
+    global: true
+  become: true
+  with_items: "{{ npm_packages }}"
+  when: (npm_packages | length) > 0
+
+- name: Install yarn packages
+  yarn:
+    name: "{{ item }}"
+    state: present
+    global: true
+  become: true
+  with_items: "{{ yarn_packages }}"
+  when: (yarn_packages | length) > 0
