@@ -49,3 +49,4 @@
   become: true
   with_items: "{{ yarn_packages }}"
   when: (yarn_packages | length) > 0
+  changed_when: false
