@@ -1,0 +1,21 @@
+- name: Make sure go is installed
+  package:
+    name: go
+    state: present
+  become: true
+  when: |
+    ansible_facts['os_family'] == "RedHat"
+
+- name: Make sure go is installed
+  package:
+    name: go
+    state: present
+  become: true
+  when: |
+    ansible_facts['os_family'] == "Debian"
+
+- name: Make sure go packages are installed
+  command:
+    cmd: "go install {{ item }}"
+  with_items: "{{ go_packages }}"
+  changed_when: false
