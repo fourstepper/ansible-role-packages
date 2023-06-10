@@ -3,7 +3,7 @@ ansible-role-packages
 
 [![builds.sr.ht status](https://builds.sr.ht/~fourstepper/ansible-role-packages.svg)](https://builds.sr.ht/~fourstepper/ansible-role-packages?)
 
-This role installs distro, flatpak and pip packages depending on defined variables
+This role installs distro, flatpak, pip, npm, yarn, cargo and go global packages depending on defined variables. By default, it doesn't install anything.
 
 Role Variables
 --------------
