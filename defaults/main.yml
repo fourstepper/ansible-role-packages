@@ -1,18 +1,16 @@
 ---
-install_chrome: true
-install_brave: true
-install_firefox: true
+install_chrome: false
+install_brave: false
+install_firefox: false
 
 install_rpmfusion:
-  both: true
+  both: false
   free: false
   nonfree: false
 
-packages:
-  - neofetch
+packages: []
 
-pip_packages:
-  - pynvim
+pip_packages: []
 
 npm_packages: []
 
@@ -20,8 +18,9 @@ yarn_packages: []
 
 cargo_packages: []
 
-flatpaks:
-  - com.spotify.Client
+go_packages: []
+
+flatpaks: []
 
 # Don't change unless broken
 rpmfusion_repos:
