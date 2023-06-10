@@ -2,7 +2,6 @@
 - name: Install rpm-fusion free
   command:
     cmd: "dnf install {{ rpmfusion_repos.free }} -y"
-    warn: false
   changed_when: false
   become: true
   when: |
@@ -13,7 +12,6 @@
 - name: Install rpm-fusion nonfree
   command:
     cmd: "dnf install {{ rpmfusion_repos.nonfree }} -y"
-    warn: false
   changed_when: false
   become: true
   when: |
@@ -24,7 +22,6 @@
 - name: Install both free and nonfree rpm-fusion
   command:
     cmd: "dnf install {{ rpmfusion_repos.free }} {{ rpmfusion_repos.nonfree }} -y"
-    warn: false
   changed_when: false
   become: true
   when: |

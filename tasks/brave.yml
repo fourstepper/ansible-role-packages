@@ -2,7 +2,6 @@
 - name: Add and enable Brave Browser repo (Fedora)
   command:
     cmd: "dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/"
-    warn: false
     creates: "/etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo"
   when: |
     install_brave and
